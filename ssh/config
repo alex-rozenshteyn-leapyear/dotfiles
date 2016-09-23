@@ -1,0 +1,24 @@
+Host github
+    HostName github.com
+    User git
+
+Match host github.com,*.github.com
+    ControlMaster no
+    PubkeyAuthentication yes
+    IdentityFile /Users/alex/.ssh/id_ecdsa
+Host aws
+    HostName ec2-54-244-206-122.us-west-2.compute.amazonaws.com
+    User ubuntu
+    ForwardAgent yes
+    PubkeyAuthentication yes
+    IdentityFile /Users/alex/.ssh/aws.pem
+
+Host *
+    IdentitiesOnly yes
+    ForwardAgent no
+    PubkeyAuthentication no
+    ControlPath ~/.ssh/master-%r@%h:%p
+    ControlMaster auto
+    ControlPersist 5
+    VisualHostKey yes
+
