@@ -6,10 +6,15 @@ Match host github.com,*.github.com
     ControlMaster no
     PubkeyAuthentication yes
     IdentityFile /Users/alex/.ssh/id_ecdsa
+
 Host aws
     HostName ec2-54-244-206-122.us-west-2.compute.amazonaws.com
-    User ubuntu
     ForwardAgent yes
+Host aws-dev
+    HostName ec2-54-244-69-65.us-west-2.compute.amazonaws.com
+    ForwardAgent yes
+Match host *.compute.amazonaws.com
+    User ubuntu
     PubkeyAuthentication yes
     IdentityFile /Users/alex/.ssh/aws.pem
 
