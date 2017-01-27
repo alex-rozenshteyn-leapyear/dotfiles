@@ -3,10 +3,26 @@ Host github
     User git
 
 Match host github.com,*.github.com
+    User git
     ControlMaster no
     PubkeyAuthentication yes
-    IdentityFile /Users/alex/.ssh/id_ecdsa
+    IdentityFile /Users/alex/.ssh/id_ed25519
 
+Host home
+    User guest
+    HostName sokka.us.to
+    PubkeyAuthentication yes
+    IdentityFile /Users/alex/.ssh/id_ed25519
+
+Host aws-distributed
+    HostName 54.89.7.191
+    User alex
+    PubkeyAuthentication yes
+    IdentityFile /Users/alex/.ssh/id_ed25519
+    ForwardAgent yes
+Host aws-east
+    HostName ec2-54-210-154-42.compute-1.amazonaws.com
+    ForwardAgent yes
 Host aws
     HostName ec2-54-244-206-122.us-west-2.compute.amazonaws.com
     ForwardAgent yes
@@ -16,7 +32,13 @@ Host aws-dev
 Match host *.compute.amazonaws.com
     User ubuntu
     PubkeyAuthentication yes
+    CheckHostIP no
     IdentityFile /Users/alex/.ssh/aws.pem
+Match host *.compute-1.amazonaws.com
+    User ubuntu
+    PubkeyAuthentication yes
+    CheckHostIP no
+    IdentityFile /Users/alex/.ssh/alexr-east.pem
 
 Host *
     IdentitiesOnly yes

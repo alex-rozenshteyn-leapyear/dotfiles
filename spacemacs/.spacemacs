@@ -31,20 +31,30 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
+     html
+     python
+     csv
+     markdown
+     yaml
+     sql
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
-     auto-completion
+     (auto-completion :variables
+                      auto-completion-return-key-behavior 'nil
+                      auto-completion-tab-key-behavior 'cycle)
      better-defaults
      haskell
      emacs-lisp
      git
+     github
+     ivy
      ;; auto-completion
      ;; better-defaults
      emacs-lisp
-     ;; git
+     (evil-snipe :variables evil-snipe-enable-alternate-f-and-t-behaviors t)
      ;; markdown
      org
      agda
@@ -53,14 +63,14 @@ values."
      ;;        shell-default-height 30
      ;;        shell-default-position 'bottom)
      spell-checking
-     (syntax-checking syntax-checking-enable-tooltips 'nil)
+     (syntax-checking :variables syntax-checking-enable-tooltips 'nil)
      ;; version-control
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '()
+   dotspacemacs-additional-packages '(narrow-indirect)
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
@@ -132,7 +142,8 @@ values."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(spacemacs-light
+   dotspacemacs-themes '(solarized-light
+                         spacemacs-light
                          spacemacs-dark)
    ;; If non nil the cursor color matches the state color in GUI Emacs.
    dotspacemacs-colorize-cursor-according-to-state t
@@ -307,13 +318,33 @@ you should place your code here."
   (setq custom-file (concat user-emacs-directory "private/custom.el"))
   (load custom-file)
 
-  (evil-define-key 'normal evil-surround-mode-map "s" 'evil-surround-region)
-  (evil-define-key 'normal evil-surround-mode-map "S" 'evil-substitute)
+  ;; (evil-define-key 'normal evil-surround-mode-map "s" 'evil-surround-region)
+  ;; (evil-define-key 'normal evil-surround-mode-map "S" 'evil-substitute)
   (add-hook 'haskell-interactive-mode-hook 'smartparens-mode)
   (add-hook 'git-commit-mode-hook 'evil-insert-state)
+  (define-key company-active-map (kbd "C-<return>") 'company-complete-selection)
   (global-set-key (kbd "s-p") 'nil)
-  ;; (require 'agda-input)
+  (global-set-key (kbd "s-w") 'nil)
+  (global-set-key (kbd "s-q") 'nil)
+  (global-set-key (kbd "<end>") 'end-of-line)
+  (global-set-key (kbd "<home>") 'beginning-of-line)
+  (sp-local-pair 'haskell-mode "'" nil :actions nil)
+  (require 'agda-input)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (ws-butler web-mode use-package sql-indent spacemacs-theme request persp-mode org-download neotree live-py-mode intero info+ hide-comnt gitattributes-mode evil-surround evil-mc evil-matchit evil-escape counsel-projectile counsel company flycheck haskell-mode helm helm-core pcache alert projectile magit with-editor hydra ivy yapfify yaml-mode window-numbering which-key wgrep volatile-highlights vi-tilde-fringe uuidgen toc-org tagedit swiper spaceline solarized-theme smex smeargle slim-mode scss-mode sass-mode restart-emacs rainbow-delimiters quelpa pyvenv pytest pyenv-mode py-isort pug-mode popwin pkg-info pip-requirements pcre2el paradox orgit org-projectile org-present org-pomodoro org-plus-contrib org-bullets open-junk-file narrow-indirect mwim move-text mmm-mode markdown-toc magit-gitflow magit-gh-pulls macrostep lorem-ipsum log4e linum-relative link-hint less-css-mode ivy-hydra indent-guide ido-vertical-mode hy-mode hungry-delete htmlize hlint-refactor hl-todo hindent highlight-parentheses highlight-numbers highlight-indentation help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-hoogle helm-gitignore helm-flx helm-descbinds helm-company helm-c-yasnippet helm-ag haskell-snippets google-translate golden-ratio gnuplot gntp github-search github-clone github-browse-file gitconfig-mode git-timemachine git-messenger git-link git-commit gist gh-md flyspell-correct-ivy flyspell-correct-helm flycheck-pos-tip flycheck-haskell flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-snipe evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-ediff evil-args evil-anzu eval-sexp-fu emmet-mode elisp-slime-nav dumb-jump diminish deft define-word cython-mode csv-mode company-web company-statistics company-ghci company-ghc company-cabal company-anaconda column-enforce-mode cmm-mode clean-aindent-mode bracketed-paste bind-key auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )

@@ -1,2 +1,3 @@
 alias top=htop
 alias g=git
+alias stack-build-env='stack build --bench --no-run-benchmarks --test --no-run-tests --fast --ghc-options="-Wwarn"'

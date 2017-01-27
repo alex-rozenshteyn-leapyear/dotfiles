@@ -2,15 +2,16 @@
 	clean = git-lfs clean %f
 	smudge = git-lfs smudge %f
 	required = true
-[commit]
-        verbose = true
 [user]
 	name = Alex Rozenshteyn
 	email = alex@leapyear.io
 [alias]
         co = checkout
-        ci = commit
+        ci = commit --verbose
         p = pull
+        pff = pull --ff-only
+        pu = push
+        puf = push --force-with-lease
         ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
         ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --graph --stat
         lp = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --patch
@@ -26,3 +27,8 @@
         a = add
         b = branch
         f = fetch
+[github]
+	oauth-token = 75864e7f5334521259884895db07fdb98ba1c200
+	user = alex-rozenshteyn
+[merge]
+	conflictstyle = diff3
