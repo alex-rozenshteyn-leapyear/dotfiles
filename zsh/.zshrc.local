@@ -6,7 +6,9 @@ fpath=(${fpath:#/usr/local/share/zsh/site-functions} /usr/local/share/zsh/site-f
 zstyle ':completion:*:manuals.*' insert-sections false
 setopt pushd_minus
 
-source ~/.iterm2_shell_integration.zsh
+if [[ -f ~/.iterm2_shell_integration.zsh ]] ; then
+        source ~/.iterm2_shell_integration.zsh
+fi
 
 source $HOME/.zshrc.local.alias
 function ssh-aws () {
@@ -16,4 +18,8 @@ function ssh-aws () {
   shift
   ssh $(aws ec2 describe-instances --region=$REGION --instance-ids=$ID | jq '.Reservations|map(.Instances|map(.PublicDnsName)) | flatten | .[0]' -r) $@
 }
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+if [[ -f /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]] ; then
+        source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+elif [[ -f $HOME/.nix-profile/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]] ; then
+        source $HOME/.nix-profile/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fi
