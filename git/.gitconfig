@@ -27,8 +27,8 @@
         a = add
         b = branch
         f = fetch
+        sup = submodule update --init --recursive
 [github]
-	oauth-token = 75864e7f5334521259884895db07fdb98ba1c200
 	user = alex-rozenshteyn
 [merge]
 	conflictstyle = diff3
