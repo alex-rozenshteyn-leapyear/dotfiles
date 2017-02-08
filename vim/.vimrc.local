@@ -13,3 +13,4 @@ if version >= 703
   call mkdir(targetdir, "p", 0700)
  endif
 endif
+set mouse=a
