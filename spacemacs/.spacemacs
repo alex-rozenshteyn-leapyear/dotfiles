@@ -544,4 +544,4 @@ This function is called at the very end of Spacemacs initialization."
  )
 )
 
-(setq custom-file (expand-file-name "private/custom.el" dotspacemacs-directory))
+(setq custom-file (expand-file-name "private/custom.el" user-emacs-directory))
