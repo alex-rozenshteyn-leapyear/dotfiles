@@ -9,12 +9,12 @@
         co = checkout
         ci = commit --verbose
         p = pull --ff-only
-        pm = pull --merge
+        pm = pull --no-ff --no-rebase
         pr = pull --rebase
         pff = pull --ff-only
         pf = pull --ff-only
         pu = push
-        puf = push --force-with-lease
+        pu-f = push --force-with-lease
         ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
         ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --graph --stat
         lp = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --patch
@@ -36,3 +36,5 @@
 	user = alex-rozenshteyn
 [merge]
 	conflictstyle = diff3
+[push]
+	default = upstream
