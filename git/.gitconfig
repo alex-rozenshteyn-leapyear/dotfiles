@@ -32,9 +32,28 @@
         b = branch
         f = fetch
         sup = submodule update --init --recursive
+	latexdiff = difftool -t latexdiff
 [github]
-	user = alex-rozenshteyn
+	user = alex-rozenshteyn-leapyear
 [merge]
 	conflictstyle = diff3
 [push]
 	default = upstream
+[core]
+	pager = less -FRX
+[difftool "latexdiff"]
+	cmd = $HOME/git-latexdiff/git-latexdiff-helper \"$LOCAL\" \"$REMOTE\"
+[diff]
+  tool = meld
+[difftool]
+  prompt = false
+[difftool "meld"]
+  trustExitCode = true
+  cmd = open -W -a Meld --args \"$LOCAL\" \"$PWD/$REMOTE\"
+[merge]
+  tool = meld
+[mergetool]
+  prompt = false
+[mergetool "meld"]
+  trustExitCode = true
+  cmd = open -W -a Meld --args --auto-merge \"$PWD/$LOCAL\" \"$PWD/$BASE\" \"$PWD/$REMOTE\" --output=\"$PWD/$MERGED\"

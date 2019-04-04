@@ -28,4 +28,55 @@ function virtual_env_prompt () {
 grml_theme_add_token virtual-env -f virtual_env_prompt
 zstyle ':prompt:grml:left:setup' items rc virtual-env change-root user at host path vcs percent
 
-# source ~/.leapyear-build-env.sh
+export LESS=-S
+
+function ly-exec () {
+  ROOT=$(git rev-parse --show-toplevel)
+  $ROOT/bin/stack.sh exec -- $@
+}
+
+function ly-build () {
+  ROOT=$(git rev-parse --show-toplevel)
+  $ROOT/bin/stack.sh build $@
+}
+
+function ly-test-build () {
+  ROOT=$(git rev-parse --show-toplevel)
+  $ROOT/bin/stack.sh test --work-dir=.stack-work-test --no-run-tests $@
+}
+
+function ly-test () {
+  ROOT=$(git rev-parse --show-toplevel)
+  $ROOT/bin/stack.sh test --work-dir=.stack-work-test $@
+}
+
+function ly-test-exec () {
+  ROOT=$(git rev-parse --show-toplevel)
+  $ROOT/bin/stack.sh --work-dir=.stack-work-test exec -- $@
+}
+
+function ly-prof-build () {
+  ROOT=$(git rev-parse --show-toplevel)
+  $ROOT/bin/stack.sh build --profile --work-dir=.stack-work-prof $@
+}
+
+function ly-prof-exec () {
+  ROOT=$(git rev-parse --show-toplevel)
+  $ROOT/bin/stack.sh --work-dir=.stack-work-prof exec -- $@
+}
+
+#compdef jira
+autoload -U compinit && compinit
+autoload -U bashcompinit && bashcompinit
+
+_jira_bash_autocomplete() {
+    local cur prev opts base
+    COMPREPLY=()
+    cur="${COMP_WORDS[COMP_CWORD]}"
+    opts=$( ${COMP_WORDS[0]} --completion-bash ${COMP_WORDS[@]:1:$COMP_CWORD} )
+    COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
+    return 0
+}
+complete -F _jira_bash_autocomplete jira
+
+export CORRECT_IGNORE_FILE='.*'
