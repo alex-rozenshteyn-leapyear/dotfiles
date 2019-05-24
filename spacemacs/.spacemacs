@@ -33,7 +33,7 @@ This function should only modify configuration layer settings."
 
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(
+   '(typescript
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press `SPC f e R' (Vim style) or
@@ -41,6 +41,7 @@ This function should only modify configuration layer settings."
      ;; ----------------------------------------------------------------
      graphviz
      html
+     dhall
      (python
       :variables
       python-test-runner 'pytest
@@ -575,6 +576,12 @@ before packages are loaded."
   (global-set-key (kbd "<end>") 'end-of-line)
   (global-set-key (kbd "<home>") 'beginning-of-line)
 
+  (use-package helm-projectile
+    :bind
+    (:map helm-projectile-find-file-map
+          ([left] . 'backward-char)
+          ([right] . 'forward-char)))
+
   (use-package helm
     :bind
     (:map helm-map
@@ -587,11 +594,10 @@ before packages are loaded."
           ([left] . 'backward-char)
           ([right] . 'forward-char)))
 
-  ;; (helm-mode 1)
-  ;; (define-key helm-ag-map (kbd "<left>") 'backward-char)
-  ;; (define-key helm-ag-map (kbd "<right>") 'forward-char)
-  ;; (define-key helm-map (kbd "<left>") 'backward-char)
-  ;; (define-key helm-map (kbd "<right>") 'forward-char)
+  (use-package ein
+    :bind
+    (:map spacemacs-ein:notebook-multilang-mode-map
+          ("/" . 'ein:notebook-scratchsheet-open)))
 
   ; moved from user-init
   (setq git-magit-status-fullscreen t)
