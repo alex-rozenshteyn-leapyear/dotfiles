@@ -2,3 +2,6 @@ alias top=htop
 alias g=git
 alias fixssh='eval $(tmux showenv -s SSH_AUTH_SOCK)'
 alias ly-env='./scripts/with-env.sh -e ./build/env.sh'
+unalias ag
+salias agu='apt upgrade'
+salias -a up='apt update ; apt upgrade'

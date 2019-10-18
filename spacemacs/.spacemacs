@@ -81,6 +81,7 @@ This function should only modify configuration layer settings."
      (syntax-checking :variables syntax-checking-enable-tooltips 'nil)
      version-control
      latex
+     eyebrowse
      )
 
    ;; List of additional packages that will be installed without being
@@ -599,8 +600,17 @@ before packages are loaded."
     (:map spacemacs-ein:notebook-multilang-mode-map
           ("/" . 'ein:notebook-scratchsheet-open)))
 
+  (add-to-list 'safe-local-variable-values '(flycheck-haskell-stack-ghc-executable . "typecheck-leapyear"))
+  (add-to-list 'safe-local-variable-values '(flycheck-haskell-hlint-executable . "hlint-leapyear"))
+
+  ; https://emacs.stackexchange.com/a/15054
+  (use-package evil
+    :init
+    (fset 'evil-visual-update-x-selection 'ignore))
+
   ; moved from user-init
-  (setq git-magit-status-fullscreen t)
+  (setq-default git-magit-status-fullscreen t)
+  (setq python-formatter 'black)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will

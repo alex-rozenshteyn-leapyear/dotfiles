@@ -57,3 +57,7 @@
 [mergetool "meld"]
   trustExitCode = true
   cmd = open -W -a Meld --args --auto-merge \"$PWD/$LOCAL\" \"$PWD/$BASE\" \"$PWD/$REMOTE\" --output=\"$PWD/$MERGED\"
+[pull]
+	rebase = true
+[rerere]
+	enabled = true
